@@ -3,6 +3,7 @@
 	import LeafletMap from './LeafletMap.svelte';
   import Header from './components/header.svelte';
   import Introduction from "./components/introduction.svelte";
+  import Box from "./components/box.svelte";
   import Footer from "./components/footer.svelte";
 </script>
 
@@ -10,7 +11,12 @@
   <Header />
   <Introduction />
   <main>
-    <LeafletMap />
+    <div class='rows'>
+      <div class='map-wrapper'><LeafletMap /></div>
+      <div class='list-wrapper'>
+        <Box />
+      </div>
+    </div>
   </main>
   <Footer />
 </div>
@@ -26,5 +32,16 @@
     flex-grow: 1;
     width: 100%;
     min-height: 500px;
-	}
+  }
+  .rows{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+  }
+  .map-wrapper{
+    flex-grow: 1;
+  }
+  .list-wrapper{
+    flex-basis: 400px;
+  }
 </style>
