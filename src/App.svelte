@@ -3,6 +3,7 @@
 	import LeafletMap from './LeafletMap.svelte';
   import Header from './components/header.svelte';
   import Introduction from "./components/introduction.svelte";
+  import Footer from "./components/footer.svelte";
 </script>
 
 <div id='layout'>
@@ -11,6 +12,7 @@
   <main>
     <LeafletMap />
   </main>
+  <Footer />
 </div>
 
 <style>
@@ -22,6 +24,7 @@
   }
 	main{
     flex-grow: 1;
-		width:100%;
+    width: 100%;
+    min-height: 500px;
 	}
 </style>

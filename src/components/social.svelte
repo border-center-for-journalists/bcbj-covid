@@ -15,7 +15,7 @@
     padding: 5px;
     width: 26px;
     height: 26px;
-    margin-left: 10px;
+    margin: 0 10px;
     box-sizing: border-box;
     text-align: center;
   }
