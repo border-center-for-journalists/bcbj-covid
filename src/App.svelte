@@ -2,10 +2,12 @@
 	import Mapbox from './Mapbox.svelte';
 	import LeafletMap from './LeafletMap.svelte';
   import Header from './components/header.svelte';
+  import Introduction from "./components/introduction.svelte";
 </script>
 
 <div id='layout'>
   <Header />
+  <Introduction />
   <main>
     <LeafletMap />
   </main>
