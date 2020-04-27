@@ -14,15 +14,15 @@
     width: 95%;
     max-width: 700px;
     text-align: center;
-    margin: 25px auto;
+    margin: 60px auto 40px;
   }
   h1{
-    font-size: 22px;
+    font-size: 28px;
   }
   p{
-    font-size: 14px
+    font-size: 18px
   }
   .author{
-    font-size: 12px;
+    font-size: 15px;
   }
 </style>
