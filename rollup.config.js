@@ -4,6 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import json from '@rollup/plugin-json';
+import image from '@rollup/plugin-image';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -17,7 +18,7 @@ export default {
 	},
 	plugins: [
 		json(),
-
+    image(),
 		svelte({
 			// enable run-time checks when not in production
 			dev: !production,
