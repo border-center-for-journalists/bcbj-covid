@@ -11,7 +11,7 @@
 
 <style>
   .container {
-    width: 95%;
+    width: 80%;
     max-width: 730px;
     text-align: center;
     margin: 60px auto 40px;
@@ -24,5 +24,10 @@
   }
   .author{
     font-size: 15px;
+  }
+  @media only screen and (min-width: 860px){
+    .container {
+      width: 90%;
+    }
   }
 </style>
