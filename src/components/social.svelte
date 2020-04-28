@@ -2,7 +2,7 @@
 </script>
 
 <a href='/'><i class='icon-facebook' /></a>
-<a href='/'><i class='icon-twitter middle' /></a>
+<a href='/'><i class='icon-twitter' /></a>
 <a href='/'><i class='icon-youtube' /></a>
 
 <style>

@@ -20,7 +20,7 @@
 <style>
   .box-container{
     width: 100%;
-    height: 400px;
+    height: 100%;
     background-color: #000;
     color: #fff;
     padding: 15px;
@@ -43,10 +43,11 @@
     border: 0 none;
     color: #000;
     font-size: 15px;
-    padding: 5px 10px;
+    padding: 8px 10px;
+    border-radius: 5px;
   }
   h3{
-    font-size: 20px;
+    font-size: 22px;
     padding-left: 50px;
     margin: 0;
   }

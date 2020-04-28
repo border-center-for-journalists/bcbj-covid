@@ -31,7 +31,7 @@
     flex: 1;
   }
   h4{
-    font-size: 14px;
+    font-size: 12px;
     margin: 0;
     margin-bottom: 5px;
   }

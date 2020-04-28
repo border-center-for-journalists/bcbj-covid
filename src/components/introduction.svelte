@@ -12,17 +12,17 @@
 <style>
   .container {
     width: 95%;
-    max-width: 700px;
+    max-width: 730px;
     text-align: center;
-    margin: 25px auto;
+    margin: 60px auto 40px;
   }
   h1{
-    font-size: 22px;
+    font-size: 27px;
   }
   p{
-    font-size: 14px
+    font-size: 18px
   }
   .author{
-    font-size: 12px;
+    font-size: 15px;
   }
 </style>
