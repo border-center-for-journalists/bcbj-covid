@@ -12,12 +12,12 @@
 <style>
   .container {
     width: 95%;
-    max-width: 700px;
+    max-width: 730px;
     text-align: center;
     margin: 60px auto 40px;
   }
   h1{
-    font-size: 28px;
+    font-size: 27px;
   }
   p{
     font-size: 18px

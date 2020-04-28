@@ -12,7 +12,7 @@
     text-align: center;
     padding: 15px 25px;
     margin: 0;
-    font-size: 12px;
+    font-size: 14px;
   }
   footer {
     width: 100%;

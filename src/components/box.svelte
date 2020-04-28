@@ -47,7 +47,7 @@
     border-radius: 5px;
   }
   h3{
-    font-size: 24px;
+    font-size: 22px;
     padding-left: 50px;
     margin: 0;
   }
