@@ -5,8 +5,11 @@ import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import json from '@rollup/plugin-json';
 import image from '@rollup/plugin-image';
+import replace from '@rollup/plugin-replace';
+//import { config } from 'dotenv';
 
 const production = !process.env.ROLLUP_WATCH;
+console.log('KEY', typeof process.env.PRISMIC_API_URL)
 
 export default {
 	input: 'src/main.js',
@@ -16,9 +19,24 @@ export default {
 		name: 'app',
 		file: 'public/build/bundle.js'
 	},
-	plugins: [
+  plugins: [
 		json(),
     image(),
+    replace({
+      // process: JSON.stringify({
+      //   env: {
+      //     PRISMIC_API_KEY: process.env.API_KEY,
+      //     PRISMIC_API_URL: process.env.API_URL
+      //     }
+      // }),
+      'customkeys': JSON.stringify({
+        
+          'PRISMIC_API_KEY': `${process.env.PRISMIC_API_KEY}`,
+          'PRISMIC_API_URL': `${process.env.PRISMIC_API_URL}`,
+        
+      })
+
+    }),
 		svelte({
 			// enable run-time checks when not in production
 			dev: !production,
@@ -28,7 +46,6 @@ export default {
 				css.write('public/build/bundle.css');
 			}
 		}),
-
 
 		// If you have external dependencies installed from
 		// npm, you'll most likely need these plugins. In

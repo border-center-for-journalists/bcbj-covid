@@ -31,7 +31,8 @@
 	main{
     flex-grow: 1;
     width: 100%;
-    min-height: 500px;
+    height: 500px;
+    box-sizing: border-box;
   }
   .rows{
     display: flex;
@@ -43,5 +44,27 @@
   }
   .list-wrapper{
     flex-basis: 400px;
+  }
+  @media only screen and (min-width: 1400px){
+    main{
+      height: 900px;
+    }
+  }
+  @media only screen and (max-width: 860px){
+    main{
+      padding: 0 25px;
+      height: auto;
+    }
+    .map-wrapper{
+      height: 400px;
+    }
+    .rows{
+      flex-direction: column;
+      height: auto;
+    }
+    .list-wrapper{
+      height: 600px;
+      flex-basis: unset;
+    }
   }
 </style>

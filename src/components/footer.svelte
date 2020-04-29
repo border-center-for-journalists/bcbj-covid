@@ -4,7 +4,7 @@
 
 <p>@ 2020 Border center</p>
 <footer>
-  <Social />
+  <Social isMobile={true} />
 </footer>
 
 <style>

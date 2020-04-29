@@ -1,9 +1,13 @@
 <script>
+  export let isMobile = false;
+  $: isMobileClass = isMobile ? 'isMobile' : ''
 </script>
 
-<a href='/'><i class='icon-facebook' /></a>
-<a href='/'><i class='icon-twitter' /></a>
-<a href='/'><i class='icon-youtube' /></a>
+<span class={isMobileClass}>
+  <a href='/'><i class='icon-facebook' /></a>
+  <a href='/'><i class='icon-twitter' /></a>
+  <a href='/'><i class='icon-youtube' /></a>
+</span>
 
 <style>
   a {
@@ -18,9 +22,15 @@
     margin: 0 10px;
     box-sizing: border-box;
     text-align: center;
+    display: inline-block;
   }
 
   .middle {
     vertical-align: middle;
+  }
+  @media only screen and (max-width: 660px){
+    span:not(.isMobile) a{
+      display: none;
+    }
   }
 </style>

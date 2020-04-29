@@ -44,4 +44,12 @@
     justify-content: flex-end;
     align-items: center;
   }
+  @media only screen and (max-width: 500px){
+    header{
+      padding: 0 10px;
+    }
+    .logo img{
+      max-width: 240px;
+    }
+  }
 </style>
