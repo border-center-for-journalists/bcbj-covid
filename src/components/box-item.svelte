@@ -46,6 +46,7 @@
   }
   h4{
     font-size: 12px;
+    font-size: 1.2em;
     margin: 0;
     margin-bottom: 5px;
   }
@@ -59,6 +60,7 @@
   }
   p{
     font-size: 12px;
+    font-size: 1em;
     margin: 0;
   }
 </style>
