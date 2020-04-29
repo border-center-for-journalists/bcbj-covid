@@ -1,16 +1,26 @@
 <script>
+  import moment from "moment"
+  import "moment/locale/es"
+  moment.locale("es")
+
+  export let alltypes = {};
+  export let item = {};
+  //console.log('ITEM', item, alltypes)
+  $: formatedDate = moment(item.date).format('DD | MMMM');
+  $: itemType = alltypes[ item.type.id ].titulo[0].text;
+  $: itemIcon = alltypes[item.type.id].icon[0].text;
 </script>
 
 <div class='item'>
   <div class='cat'>
-    <i class='icon-menu' />
+    <i class='material-icons'>{itemIcon}</i>
   </div>
   <div class='info'>
     <h4><a href='/'>
-      <span>1 | mayo</span>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit
+      <span>{formatedDate}</span>
+      {item.title[0].text}
     </a></h4>
-    <p>Lorem ipsum dolor</p>
+    <p>{itemType}</p>
   </div>
 </div>
 
@@ -26,6 +36,10 @@
     width: 40px;
     color: #fdf902;
     font-size: 35px;
+    display: flex;
+  }
+  .item .cat i.material-icons{
+    font-size: 28px;
   }
   .item .info{
     flex: 1;
