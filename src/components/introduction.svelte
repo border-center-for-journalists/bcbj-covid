@@ -18,12 +18,15 @@
   }
   h1{
     font-size: 27px;
+    font-size: 1.7em;
   }
   p{
-    font-size: 18px
+    font-size: 18px;
+    font-size: 1.15em;
   }
   .author{
     font-size: 15px;
+    font-size: 1em;
   }
   @media only screen and (min-width: 860px){
     .container {
