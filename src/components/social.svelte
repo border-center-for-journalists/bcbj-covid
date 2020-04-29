@@ -1,6 +1,5 @@
 <script>
   export let isMobile = false;
-  console.log('MOBILE', isMobile);
   $: isMobileClass = isMobile ? 'isMobile' : ''
 </script>
 
