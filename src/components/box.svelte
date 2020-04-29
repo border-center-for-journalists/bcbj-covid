@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte';
-  import BoxItem from "./box-item.svelte";
+  import BoxList from "./box-list.svelte";
   import { getMunicipalities, getResourceTypes, getResources } from "../services/prismicconnect.js";
 
   Object.filter = (obj, predicate) =>
@@ -74,18 +74,14 @@
     </form>
   </div>
   <div class='box-body'>
-    {#each newItemsKeys as newItemKey}
+    {#each newItemsKeys as newItemKey, i}
       {#if newItems[newItemKey].resources.length > 0 }
-        <div>
-          <h3>{newItems[newItemKey].name}</h3>
-          
-          {#each newItems[newItemKey].resources as resource}
-            <BoxItem 
-              alltypes={resourceTypes} 
-              item={resource}
-            />
-          {/each}
-        </div>
+        <BoxList 
+          listItem={newItems[newItemKey]} 
+          alltypes={resourceTypes} 
+          search={(search !== '')}
+          index={i}
+        />
       {/if}
     {/each}
   </div>
@@ -118,13 +114,6 @@
     font-size: 15px;
     padding: 8px 10px;
     border-radius: 5px;
-  }
-  h3{
-    font-size: 22px;
-    font-size: 1.4em;
-    padding-left: 50px;
-    margin: 0;
-    margin-top: 10px;
   }
   .box-body{
     flex: 1;
