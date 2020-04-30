@@ -1,65 +1,70 @@
 <script>
-  let apiEndpoint = customkeys['PRISMIC_API_URL'];
-  let api_key = customkeys['PRISMIC_API_KEY'];
-
   import { onMount } from 'svelte';
-  import Prismic from "prismic-javascript";
-  import PrismicDOM from 'prismic-dom';
-  import BoxItem from "./box-item.svelte";
+  import BoxList from "./box-list.svelte";
+  import { getMunicipalities, getResourceTypes, getResources } from "../services/prismicconnect.js";
+
+  Object.filter = (obj, predicate) =>
+      Object.keys(obj)
+        .filter(key => predicate(obj[key]))
+        .reduce((res, key) => (res[key] = obj[key], res), {});
 
   let allItems = []
   let resourceTypes = {};
   let search = '';
-  $: newItems = allItems
-    .filter(resourceRaw => {
+  let municipalities = {};
+  $: newItems = Object.filter(allItems
+    .reduce((obj, resourceRaw) => {
       const resource = resourceRaw.data
-      return (
-        search === ''
-        || resourceRaw.type === 'covidresourcetype'
-        || resource.title[0].text.indexOf(search) !== -1
-      )
-    }).reduce((obj, resourceRaw) => {
-      const resource = resourceRaw.data
-      if (resourceRaw.type === 'covidresourcetype') {
-        resourceTypes[resourceRaw.id] = resource
-      } else {
         if (!resource.municipalityid || resource.municipalityid.length === 0)
           return obj
-        const entity = resource.municipalityid[0].text
+        //const entity = resource.municipalityid[0].text;
+        const entity = resource.municipality.id;
         if (obj[entity]) {
           obj[entity].resources.push(resource)
         } else {
+          const m = municipalities[entity];
           obj[entity] = {
-            name: 'Nogales, Sonora',
+            name: `${m.name[0].text}, ${m.state[0].text}`,
+            municipality: municipalities[entity],
             resources: [resource]
           }
         }
-      }
       return obj;
-    }, {});
+    }, {}), item => (
+      search === ''
+      || item.name.toLowerCase().indexOf(search.toLowerCase()) !== -1
+    )
+    );
+    // .filter(resourceRaw => {
+    //   const resource = resourceRaw.data
+    //   return (
+    //     search === ''
+    //     || resource.title[0].text.indexOf(search) !== -1
+    //   )
+    // });
   $: newItemsKeys = Object.keys(newItems);
 
   onMount(async () => {
-    // console.log(apiEndpoint)
-    // console.log('API_KEY', apiEndpoint, api_key);
-    if (!api_key || api_key === '') return;
-    Prismic.getApi(apiEndpoint, { accessToken: api_key }).then(api =>
-      api.query(
-        Prismic.Predicates.any("document.type", ["covidresource", "covidresourcetype"]),
-        {
-          pageSize: 100,
-          orderings: `[my.covidresource.date desc]`
-        }
-      )
-    ).then(response => {
-      //console.log("Documents: ", response.results);
-      //const results = { ...response.results };
-      const results = response.results
-      allItems = results;
-    }, function (err) {
-      console.log("Something went wrong: ", err);
-    });
+    const responseGetMunicipalities = await getMunicipalities();
+    if( responseGetMunicipalities ){
+      municipalities = transformArray(responseGetMunicipalities);
+    }
+    const responseGetResourceTypes = await getResourceTypes();
+    if (responseGetResourceTypes) {
+      resourceTypes = transformArray(responseGetResourceTypes);
+    }
+    const responseGetResources = await getResources();
+    if (responseGetResources) {
+      allItems = responseGetResources.results;
+    }
   });
+  function transformArray( data ){
+    return data.results.reduce((obj, r) => {
+      const m = r.data
+      obj[r.id] = m;
+      return obj;
+    }, {});
+  }
 </script>
 
 <div class='box-container'>
@@ -69,17 +74,14 @@
     </form>
   </div>
   <div class='box-body'>
-    {#each newItemsKeys as newItemKey}
+    {#each newItemsKeys as newItemKey, i}
       {#if newItems[newItemKey].resources.length > 0 }
-        <div>
-          <h3>{newItems[newItemKey].name}</h3>
-          {#each newItems[newItemKey].resources as resource}
-            <BoxItem 
-              alltypes={resourceTypes} 
-              item={resource}
-            />
-          {/each}
-        </div>
+        <BoxList 
+          listItem={newItems[newItemKey]} 
+          alltypes={resourceTypes} 
+          search={(search !== '')}
+          index={i}
+        />
       {/if}
     {/each}
   </div>
@@ -112,12 +114,6 @@
     font-size: 15px;
     padding: 8px 10px;
     border-radius: 5px;
-  }
-  h3{
-    font-size: 22px;
-    padding-left: 50px;
-    margin: 0;
-    margin-top: 10px;
   }
   .box-body{
     flex: 1;
