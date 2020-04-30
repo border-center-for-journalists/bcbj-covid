@@ -11,7 +11,7 @@ async function getData(type, pageSize = 1000, orderParam = 'publish_date') {
   return await prismicClient.query(
     Prismic.Predicates.at("document.type", type),
     {
-      pageSize: pageSize,
+      pageSize,
       orderings: `[my.${type}.${orderParam} desc]`
     }
   );
@@ -25,6 +25,17 @@ export const getResourceTypes = async () => {
   return await getData('covidresourcetype');
 }
 
-export const getResources = async () => {
-  return await getData('covidresource', 100, 'date');
+export const getResources = async (municipalityId, pageSize = 100, page = 1) => {
+  //return await getData('covidresource', 100, 'date');
+  return await prismicClient.query(
+    [
+      Prismic.Predicates.at("document.type", 'covidresource'),
+      Prismic.Predicates.at('my.covidresource.municipality', municipalityId)
+    ],
+    {
+      pageSize,
+      page,
+      orderings: `[my.covidresource.date desc]`
+    }
+  );
 }
