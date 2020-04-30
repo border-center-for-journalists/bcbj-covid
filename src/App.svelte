@@ -5,11 +5,13 @@
   import Introduction from "./components/introduction.svelte";
   import Box from "./components/box.svelte";
   import Footer from "./components/footer.svelte";
+  import MapControls from "./components/map-controls.svelte";
 </script>
 
 <div id='layout'>
   <Header />
   <Introduction />
+  <MapControls />
   <main>
     <div class='rows'>
       <div class='map-wrapper'><LeafletMap /></div>

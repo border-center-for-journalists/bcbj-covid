@@ -5,26 +5,30 @@
 
   let mapContainer;    
   let leafletMap;    
-
-	export let center = [23.6345, -102.5528];
-  export let zoom = 6;
-
+  const corner1 = L.latLng(33.352741, -118.684017);
+  const corner2 = L.latLng(15.024371, -85.169640);
+  const bounds = L.latLngBounds(corner1,corner2);
   onMount(async () => {
-      leafletMap = L.map(mapContainer).setView(center, zoom);
+      leafletMap = L.map(mapContainer,{
+        scrollWheelZoom : false,
+        maxBounds : bounds,
+        maxBoundsViscosity : .8
+      }).fitBounds(bounds);
       const markers = await utils.getMarkers();
-      markers.addTo(leafletMap);
       L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
           attribution: '',
           maxZoom: 18,
           id: 'elsonny/ck9lwp2d80t8e1il970gysz4u',
           tileSize: 512,
           zoomOffset: -1,
-          accessToken: 'pk.eyJ1IjoiZWxzb25ueSIsImEiOiJjazkwYWQ2d28wMDJ4M25vNjR3b2h5bWpiIn0.iQk1NtwS-2bJafmWg5Ol9w'
-      }).addTo(leafletMap);         
+          accessToken: 'pk.eyJ1IjoiZWxzb25ueSIsImEiOiJjazkwYWQ2d28wMDJ4M25vNjR3b2h5bWpiIn0.iQk1NtwS-2bJafmWg5Ol9w',
+      }).addTo(leafletMap);      
+      markers[0].addTo(leafletMap);
+      markers[1].addTo(leafletMap);   
       resize();
   });    
   const resize = () => {
-      leafletMap.invalidateSize();
+      leafletMap.invalidateSize().fitBounds(bounds);
   };
 </script>
 
