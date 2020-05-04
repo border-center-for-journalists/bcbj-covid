@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import BoxList from "./box-list.svelte";
   import { getMunicipalities, getResourceTypes } from "../services/prismicconnect.js";
+  import Loader from "./loader.svelte";
 
   let search = '';
   let dataPromise = getData();
@@ -28,7 +29,9 @@
     <input bind:value={search} type='text' placeholder="Buscar" />
   </div>
   <div class='box-body'>
-    {#await dataPromise then resultData }
+    {#await dataPromise }
+      <Loader />
+    {:then resultData }
       {#each resultData.municipalities as municipality ( municipality.id )}
         <BoxList 
           listItem={municipality} 
@@ -41,6 +44,11 @@
 </div>
 
 <style>
+  .loader img{
+    width: 20px;
+    margin: 10px auto 0;
+    display: block;
+  }
   .box-container{
     width: 100%;
     height: 100%;
