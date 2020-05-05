@@ -23,8 +23,8 @@
           zoomOffset: -1,
           accessToken: 'pk.eyJ1IjoiZWxzb25ueSIsImEiOiJjazkwYWQ2d28wMDJ4M25vNjR3b2h5bWpiIn0.iQk1NtwS-2bJafmWg5Ol9w',
       }).addTo(leafletMap);      
-      markers[0].addTo(leafletMap);
-      markers[1].addTo(leafletMap);   
+      markers[0].addTo(leafletMap);   
+      markers[1].addTo(leafletMap);
       resize();
   });    
   const resize = () => {

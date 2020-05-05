@@ -67,8 +67,8 @@
     display: inline-block;
     width: 5px;
     height: 5px;
-    background-color: rgba(249, 96, 97, .2);
-    border: 1px solid rgb(249, 96, 97);
+    background-color: rgba(253, 249, 3, .2);
+    border: 1px solid rgb(253, 249, 3);
     border-radius: 50%;
   }
   .circle.medium{

@@ -2,6 +2,7 @@
   import BoxItem from "./box-item.svelte";
   import { getResources } from "../services/prismicconnect.js";
   import { slide } from 'svelte/transition';
+  import Loader from "./loader.svelte";
 
   export let listItem = {};
   export let alltypes = {};
@@ -34,7 +35,9 @@
     <i class='material-icons'>{ collapsed ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }</i>
     {listName} 
   </h3>
-  {#await promise then resources}
+  {#await promise}
+    <Loader />
+  {:then resources}
     {#if !collapsed}
       <div transition:slide>
         {#each resources as resource}
