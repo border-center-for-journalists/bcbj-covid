@@ -74,8 +74,9 @@
     border: 0 none;
     color: #000;
     font-size: 15px;
-    padding: 8px 10px;
+    padding: 8px 10px 8px 35px;
     border-radius: 5px;
+    background: #fff url("/images/lupa.png") no-repeat 8px center;
   }
   .box-body{
     flex: 1;
