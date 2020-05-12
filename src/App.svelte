@@ -6,15 +6,17 @@
   import Box from "./components/box.svelte";
   import Footer from "./components/footer.svelte";
   import MapControls from "./components/map-controls.svelte";
+
+  let dimension = 'confirmed';
 </script>
 
 <div id='layout'>
   <Header />
   <Introduction />
-  <MapControls />
+  <MapControls bind:dimension />
   <main>
     <div class='rows'>
-      <div class='map-wrapper'><LeafletMap /></div>
+      <div class='map-wrapper'><LeafletMap currentDimension={dimension}/></div>
       <div class='list-wrapper'>
         <Box />
       </div>

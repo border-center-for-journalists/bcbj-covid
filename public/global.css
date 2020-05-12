@@ -70,6 +70,37 @@ button:focus {
 	border-color: #666;
 }
 
+/*Tooltips*/
+.leaflet-tooltip p{
+  font-weight: bold;
+  margin: 5px 0;
+  min-width: 200px;
+}
+.leaflet-tooltip .tooltip-row{
+  display: flex;
+  width: 100%;
+  border-top: 1px solid rgba(152, 152, 152, 0.6);
+  padding: 5px 0;
+  align-items: flex-end;
+}
+.leaflet-tooltip .tooltip-row > div{
+  flex-grow: 1;
+  display: flex;
+}
+.leaflet-tooltip .tooltip-row div + div{
+  text-align: end;
+  padding-left: 10px;
+  justify-content: flex-end;
+}
+.leaflet-tooltip .tooltip-row div:nth-child(3){
+  flex-basis: 80px;
+  max-width: 80px;
+}
+.leaflet-tooltip .tooltip-row.tooltip-header{
+  border-top: 0 none;
+  color: #989898;
+}
+
 
 /* ICOMOON FONT */
 @font-face {
