@@ -1,11 +1,13 @@
-<script></script>
+<script>
+  export let dimension = 'confirmed';  
+</script>
 
 <div class='container'>
   <h2>Casos confirmados en ...</h2>
   <div class='rows'>
-    <button class='active'>Casos totales</button>
-    <button>Muertes</button>
-    <button>Per capita</button>
+    <button class:active={dimension === 'confirmed'} on:click={() => dimension = 'confirmed'} >Casos totales</button>
+    <button class:active={dimension === 'deaths'} on:click={() => dimension = 'deaths'} >Muertes</button>
+    <button class:active={dimension === 'confirmedPerCapita'} on:click={() => dimension = 'confirmedPerCapita'} >Per capita</button>
   </div>
   <div class='rows'>
     <span>100</span>
