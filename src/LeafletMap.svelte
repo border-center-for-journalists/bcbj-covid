@@ -31,6 +31,7 @@
     const data = await utils.loadData();
     municipalities = utils.combineData(data);
     lastUpdate = utils.getLastUpdateDate(municipalities);
+    console.log(municipalities)
     addMarkers(currentDimension);
     resize();
   });
@@ -43,10 +44,8 @@
     markers[1].addTo(leafletMap);
   };
   afterUpdate(async () => {
-    if (municipalities) {
-      leafletMap.removeLayer(markers[0]);
-      leafletMap.removeLayer(markers[1]);
-      addMarkers(currentDimension);
+    if (municipalities && leafletMap) {
+      utils.updateMarkers(municipalities, currentDimension, markers[0], markers[1])
     }
   })
 
