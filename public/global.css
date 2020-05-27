@@ -71,10 +71,18 @@ button:focus {
 }
 
 /*Tooltips*/
+.leaflet-tooltip{
+  background-color: #000!important;
+  border-color: #000!important;
+}
+.leaflet-tooltip-top::before{
+  border-top-color:#000!important;
+}
 .leaflet-tooltip p{
   font-weight: bold;
   margin: 5px 0;
   min-width: 200px;
+  color: #fff;
 }
 .leaflet-tooltip .tooltip-row{
   display: flex;
@@ -86,19 +94,23 @@ button:focus {
 .leaflet-tooltip .tooltip-row > div{
   flex-grow: 1;
   display: flex;
+  color: #fff;
 }
 .leaflet-tooltip .tooltip-row div + div{
   text-align: end;
   padding-left: 10px;
   justify-content: flex-end;
+  color: #fdf902;
 }
 .leaflet-tooltip .tooltip-row div:nth-child(3){
   flex-basis: 80px;
   max-width: 80px;
 }
+.leaflet-tooltip .tooltip-row.tooltip-header div{
+  color: #989898!important;
+}
 .leaflet-tooltip .tooltip-row.tooltip-header{
   border-top: 0 none;
-  color: #989898;
 }
 
 

@@ -1,6 +1,6 @@
 <script>
-	import Mapbox from './Mapbox.svelte';
-	import LeafletMap from './LeafletMap.svelte';
+  import Mapbox from './Mapbox.svelte';
+  import LeafletMap from './LeafletMap.svelte';
   import Header from './components/header.svelte';
   import Introduction from "./components/introduction.svelte";
   import Box from "./components/box.svelte";
@@ -8,15 +8,18 @@
   import MapControls from "./components/map-controls.svelte";
 
   let dimension = 'confirmed';
+  let lastUpdate = "";
 </script>
 
 <div id='layout'>
   <Header />
-  <Introduction />
+  <Introduction lastUpdate={lastUpdate} />
   <MapControls bind:dimension />
   <main>
     <div class='rows'>
-      <div class='map-wrapper'><LeafletMap currentDimension={dimension}/></div>
+      <div class='map-wrapper'>
+        <LeafletMap bind:lastUpdate currentDimension={dimension} />
+      </div>
       <div class='list-wrapper'>
         <Box />
       </div>
@@ -26,47 +29,56 @@
 </div>
 
 <style>
-  #layout{
+  #layout {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
   }
-	main{
+
+  main {
     flex-grow: 1;
     width: 100%;
     height: 500px;
     box-sizing: border-box;
   }
-  .rows{
+
+  .rows {
     display: flex;
     flex-direction: row;
     height: 100%;
   }
-  .map-wrapper{
+
+  .map-wrapper {
     flex-grow: 1;
   }
-  .list-wrapper{
+
+  .list-wrapper {
     flex-basis: 400px;
   }
-  @media only screen and (min-width: 1400px){
-    main{
+
+  @media only screen and (min-width: 1400px) {
+    main {
       height: 900px;
     }
   }
-  @media only screen and (max-width: 860px){
-    main{
+
+  @media only screen and (max-width: 860px) {
+    main {
       padding: 0 25px;
       height: auto;
     }
-    .map-wrapper{
+
+    .map-wrapper {
       height: 400px;
     }
-    .rows{
+
+    .rows {
       flex-direction: column;
       height: auto;
     }
-    .list-wrapper{
+
+    .list-wrapper {
       height: 600px;
       flex-basis: unset;
     }
