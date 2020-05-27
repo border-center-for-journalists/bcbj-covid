@@ -14,7 +14,7 @@
       <span class="circle"></span>
       <span class="circle medium"></span>
       <span class="circle large"></span>
-      <span>10,000</span>
+      <span>2,000</span>
     </div>
     <p>Doble click en el mapa para hacer zoom.</p>
   </div>
@@ -91,13 +91,13 @@
   }
 
   .circle.medium {
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
   }
 
   .circle.large {
-    width: 25px;
-    height: 25px;
+    width: 40px;
+    height: 40px;
   }
 
   span {

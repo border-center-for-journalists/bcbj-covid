@@ -10,6 +10,8 @@
   let leafletMap;
   let municipalities;
   let markers;
+  let counties;
+  let usMarkers;
 
   const corner1 = L.latLng(33.352741, -118.684017);
   const corner2 = L.latLng(15.024371, -85.169640);
@@ -30,8 +32,8 @@
 
     const data = await utils.loadData();
     municipalities = utils.combineData(data);
+    counties = utils.formatUS(data.usa);
     lastUpdate = utils.getLastUpdateDate(municipalities);
-    console.log(municipalities)
     addMarkers(currentDimension);
     resize();
   });
@@ -40,12 +42,18 @@
   };
   const addMarkers = (dimension) => {
     markers = utils.makeMarkers(municipalities, dimension);
+    usMarkers = utils.makeMarkers(counties, dimension);
+    
+    usMarkers[0].addTo(leafletMap);
+    usMarkers[1].addTo(leafletMap);
+
     markers[0].addTo(leafletMap);
     markers[1].addTo(leafletMap);
   };
   afterUpdate(async () => {
     if (municipalities && leafletMap) {
-      utils.updateMarkers(municipalities, currentDimension, markers[0], markers[1])
+      utils.updateMarkers(municipalities, currentDimension, markers[0], markers[1]);
+      utils.updateMarkers(counties, currentDimension, usMarkers[0], usMarkers[1]);
     }
   })
 
