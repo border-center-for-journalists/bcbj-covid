@@ -35,12 +35,15 @@
   function togglePlay() {
     play = !play;
     if (play) {
+      currentDateIndex = 0
       playTimer = setInterval(function () {
-        if (currentDateIndex + 1 >= currentDateArray.length)
-          currentDateIndex = 0;
-        else
+        if (currentDateIndex + 1 >= currentDateArray.length) {
+          play = false
+          clearInterval(playTimer)
+        } else {
           currentDateIndex += 1;
-      }, 1000);
+        }
+      }, 500);
     } else {
       clearInterval(playTimer)
     }
