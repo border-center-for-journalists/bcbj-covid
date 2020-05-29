@@ -8,34 +8,47 @@
 
   export let currentDateIndex = 0;
   export let currentDateArray = [];
-  export let play = false;
 
   $: dateArray = currentDateArray.map(d => ({
     date: d,
-    el: null,
     formatDate: moment(d, 'DD-MM-YY').format('DD | MM')
   }))
 
+  let timeline = null;
   let selectedDate = "";
   let tooltipLeft = tweened(-25, {
     duration: 400,
     easing: cubicOut
   });
+  let play = false;
+  let playTimer = null;
 
-  function getLeft(el, i) {
-    const w = el.clientWidth;
+  function getLeft(i) {
+    const w = timeline.clientWidth / dateArray.length;
     const newLeft = (i * w) + (w / 2) - 25;
     return newLeft
   }
 
-  function handleTickClick(e, day, i) {
+  function handleTickClick(i) {
     currentDateIndex = i;
+  }
+  function togglePlay() {
+    play = !play;
+    if (play) {
+      playTimer = setInterval(function () {
+        if (currentDateIndex + 1 >= currentDateArray.length)
+          currentDateIndex = 0;
+        else
+          currentDateIndex += 1;
+      }, 1000);
+    } else {
+      clearInterval(playTimer)
+    }
   }
 
   afterUpdate(async () => {
     if (dateArray.length > 0) {
-      const el = dateArray[currentDateIndex].el;
-      $tooltipLeft = getLeft(el, currentDateIndex)
+      $tooltipLeft = getLeft(currentDateIndex)
       selectedDate = dateArray[currentDateIndex].formatDate
     }
   })
@@ -44,10 +57,10 @@
 <div class="black-sector">
   <div class="container">
     <p>Linea del Tiempo</p>
-    <button>
+    <button on:click={togglePlay}>
       <i class='material-icons'>{ play ? "stop": "play_circle_outline" }</i>
     </button>
-    <div class="timeline">
+    <div class="timeline" bind:this={timeline}>
       <div class="dateTooltip" style="left:{$tooltipLeft}px;">
         <span>{selectedDate}</span>
         <span class="arrow" />
@@ -56,8 +69,7 @@
         <a 
           class="square" 
           class:active={currentDateIndex === index} 
-          on:click={(e) => handleTickClick(e, day, index)} 
-          bind:this={day.el}
+          on:click={() => handleTickClick( index)} 
         />
       {/each}
       
@@ -159,8 +171,15 @@
     line-height: 20px;
     border: 0 none;
     background-color: rgb(253, 249, 3);
+    border: 1px solid rgb(253, 249, 3);
     color: #000;
     margin: 0;
     border-radius: 5px;
+    cursor: pointer;
+    transition: all .3s;
+  }
+  button:hover{
+    background-color: #000;
+    color: rgb(253, 249, 3);
   }
 </style>

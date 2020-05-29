@@ -45,6 +45,7 @@
     usaOffset = getOffset()
     addMarkers(currentDimension);
     resize();
+    // console.log(municipalities, counties)
   });
   const getOffset = () => {
     const fMxDate = municipalities[0].dates[0]
