@@ -6,8 +6,11 @@
   import Box from "./components/box.svelte";
   import Footer from "./components/footer.svelte";
   import MapControls from "./components/map-controls.svelte";
+  import MapTimeline from "./components/map-timeline.svelte";
 
   let dimension = 'confirmed';
+  let currentDateIndex = 0;
+  let currentDateArray = [];
   let lastUpdate = "";
 </script>
 
@@ -15,10 +18,11 @@
   <Header />
   <Introduction lastUpdate={lastUpdate} />
   <MapControls bind:dimension />
+  <MapTimeline bind:currentDateIndex currentDateArray={currentDateArray} />
   <main>
     <div class='rows'>
       <div class='map-wrapper'>
-        <LeafletMap bind:lastUpdate currentDimension={dimension} />
+        <LeafletMap currentDimension={dimension} bind:lastUpdate bind:currentDateIndex bind:currentDateArray />
       </div>
       <div class='list-wrapper'>
         <Box />
