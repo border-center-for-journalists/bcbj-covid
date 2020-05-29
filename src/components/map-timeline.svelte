@@ -43,7 +43,7 @@
         } else {
           currentDateIndex += 1;
         }
-      }, 500);
+      }, 250);
     } else {
       clearInterval(playTimer)
     }
