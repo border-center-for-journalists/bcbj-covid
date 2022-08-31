@@ -24,7 +24,7 @@
   "dependencies": {
     "@atomico/rollup-plugin-import-css": "^1.0.3",
     "mapbox-gl": "^1.9.1",
-    "moment-timezone": "^0.5.28",
+    "moment-timezone": "^0.5.35",
     "papaparse": "^5.2.0",
     "prismic-dom": "^2.2.3",
     "prismic-javascript": "^2.7.1",
